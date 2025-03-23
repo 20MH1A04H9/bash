@@ -1,4 +1,8 @@
 #! /bin/bash
-read -p "enter the first number : " a
-read -s p "Enter the second number : " b
-echo " The Result of addition is : $((a+b))"
+if [ $# -eq 2 ]
+then
+    c=$(($1+$2))
+    echo " The result is $c "
+else
+    echo "No output"
+fi
