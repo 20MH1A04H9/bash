@@ -1,3 +1,5 @@
+#!/bin/bash
+
 for word in $(cat password.txt)
 do
   hash=$(echo -n $word | md5sum | cut -d " " -f 1)
