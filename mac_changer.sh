@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Check if script is run as root
+if [ "$EUID" -ne 0 ]; then
+    echo "Please run this script as root (use sudo)"
+    exit 1
+fi
+
 # Function to display usage
 usage() {
     echo "Usage: $0 -i <interface> [-r | -m <mac_address>]"
