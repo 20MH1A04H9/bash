@@ -1,2 +1,2 @@
-#!C:\Users\LinuX\AppData\Local\Microsoft\WindowsApps\python.exe
+#! /usr/bin/python3
 print("Hello World!")
