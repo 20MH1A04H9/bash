@@ -1,5 +1,23 @@
 #!/bin/bash
 
+# ANSI color codes
+ORANGE='\033[38;5;208m'
+RESET='\033[0m'
+
+# Function to print the banner
+print_banner() {
+  echo -e "${ORANGE}                                                                                                    ${RESET}"
+  echo -e "${ORANGE}                                    ███╗    ███╗ █████╗ ██████╗                                    ${RESET}"
+  echo -e "${ORANGE}                                    ████╗  ████║██╔══██╗██╔════╝                                    ${RESET}"
+  echo -e "${ORANGE}                                    ██╔████╔ ██║███████║██║                                         ${RESET}"
+  echo -e "${ORANGE}                                    ██║╚██╔╝ ██║██╔══██║██║                                         ${RESET}"
+  echo -e "${ORANGE}                                    ██║ ╚═╝  ██║██║  ██║╚██████╗                                    ${RESET}"
+  echo -e "${ORANGE}                                                                                                    ${RESET}"
+  echo -e "${ORANGE}                    ========================================================================${RESET}"
+  echo -e "                                         Version : 1.0     Twitter : VISWA"
+  echo -e "${ORANGE}                    ========================================================================${RESET}"
+}
+
 # Interface to change
 INTERFACE="eth0" # Default interface, user can change it
 
@@ -36,14 +54,14 @@ change_mac() {
   if [[ "$permanent" == "y" ]]; then
     # Persist the MAC address (requires systemd or similar)
     if [[ -f /etc/systemd/network/10-macchanger.link ]]; then
-        echo "[Match]" > /etc/systemd/network/10-macchanger.link
-        echo "MACAddress=$DEFAULT_MAC" >> /etc/systemd/network/10-macchanger.link
-        echo "[Link]" >> /etc/systemd/network/10-macchanger.link
-        echo "MACAddress=$mac_address" >> /etc/systemd/network/10-macchanger.link
-        systemctl restart systemd-networkd
+      echo "[Match]" > /etc/systemd/network/10-macchanger.link
+      echo "MACAddress=$DEFAULT_MAC" >> /etc/systemd/network/10-macchanger.link
+      echo "[Link]" >> /etc/systemd/network/10-macchanger.link
+      echo "MACAddress=$mac_address" >> /etc/systemd/network/10-macchanger.link
+      systemctl restart systemd-networkd
     else
-        echo "Warning: Persistent MAC address change requires systemd-networkd configuration."
-        echo "Create /etc/systemd/network/10-macchanger.link manually if needed."
+      echo "Warning: Persistent MAC address change requires systemd-networkd configuration."
+      echo "Create /etc/systemd/network/10-macchanger.link manually if needed."
     fi
   fi
 }
@@ -52,6 +70,7 @@ change_mac() {
 DEFAULT_MAC=$(macchanger -s "$INTERFACE" | grep "Current MAC" | awk '{print $3}')
 
 # Main script logic
+print_banner
 echo "Current Interface: $INTERFACE"
 echo "Current MAC: $DEFAULT_MAC"
 
