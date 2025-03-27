@@ -1,15 +1,15 @@
 #!/bin/bash
 
 sum() {
-  echo -n $(( $1 + $2 ))
+  $(( $1 + $2 ))
 }
 
 subtract() {
-  echo -n $(( $1 - $2 ))
+  $(( $1 - $2 ))
 }
 
 multiply() {
-  echo -n $(( $1 * $2 ))
+  $(( $1 * $2 ))
 }
 
 echo -n "Enter first number: "
